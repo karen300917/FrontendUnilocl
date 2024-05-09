@@ -5,37 +5,3 @@
     border-width: 1px 0;
     box-shadow: inset 0 0.5em 1.5em rgb(0 0 0 / 10%), inset 0 0.125em 0.5em rgb(0 0 0 / 15%);
     }
-
-    .card {
-        max-width: 400px; /* Ancho máximo del formulario */
-        margin: 20px; /* Margen para dejar espacio a la derecha */
-        padding: 20px; /* Añade un poco de espacio alrededor del formulario */
-        border: 1px solid #ccc; /* Añade un borde al formulario */
-        border-radius: 10px; /* Añade bordes redondeados al formulario */
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añade una sombra al formulario */
-        position: absolute; /* Posiciona el formulario de manera absoluta */
-        top: 50%; /* Lo posiciona en la mitad verticalmente */
-        right: 20px; /* Lo posiciona a 20px del borde derecho */
-        transform: translateY(-50%); /* Corrige la posición vertical */
-        max-height: calc(100vh - 40px); /* Limita la altura al 100% del viewport - 40px de margen superior e inferior */
-        overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido excede la altura máxima */
-      }
-      
-      .form-group {
-        margin-bottom: 15px; /* Espacio entre cada grupo de etiqueta y entrada */
-      }
-      
-      label {
-        display: block; /* Muestra las etiquetas en bloques (una debajo de la otra) */
-        font-weight: bold; /* Hace que el texto de la etiqueta sea más visible */
-      }
-      
-      input[type="text"],
-      input[type="email"] {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        padding: 8px; /* Espaciado interior */
-        border: 1px solid #ccc; /* Borde */
-        border-radius: 5px; /* Bordes redondeados */
-        box-sizing: border-box; /* Incluye el borde y el relleno en el ancho y alto */
-      }
-      
