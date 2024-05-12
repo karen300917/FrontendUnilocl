@@ -1,8 +1,78 @@
-.b-example-divider {
+/* .b-example-divider {
         width: 100%;
         height: 3rem;
         background-color: rgba(0, 0, 0, .1);
         border: solid rgba(0, 0, 0, .15);
         border-width: 1px 0;
         box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
+      } */
+      
+      
+
+      body {
+      font-family: 'Poppins', sans-serif; /* Cambia el tipo de letra para todo el documento */
+     }
+
+      .card-header {
+        background-color: black;
+        color: white;
+        border-radius: 10px 10px 0 0;
+        padding-left: 5px; /* Ajusta el espaciado izquierdo */
+    }
+    
+    .card-body {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 0 0 10px 10px;
+        padding: 20px;
+    }
+    
+    .formulario {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .campo {
+        margin-bottom: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: white;
+    }
+    
+    input[type="email"],
+    input[type="password"],
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #333; /* Cambia el color de fondo */
+        color: white; /* Cambia el color del texto */
+        font-family: 'Poppins', sans-serif;  /* Cambia el tipo de letra */
+    }
+    
+    button {
+        background-color: #007bff;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    .recuperar-contrasena {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        display: block; /* Alinea el enlace debajo del botón */
+        margin-top: 10px;
+    }
+    
+    .recuperar-contrasena:hover {
+        text-decoration: underline;
+    }
+    

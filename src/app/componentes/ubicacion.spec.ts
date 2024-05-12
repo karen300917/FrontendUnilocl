@@ -1,4 +1,5 @@
-import { Ubicacion } from './ubicacion';
+import { Ubicacion } from "../dto/ubicacion";
+
 
 describe('Ubicacion', () => {
   it('should create an instance', () => {
