@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-registro',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './registro.component.html',
   styleUrl: './registro.component.css'
 })
@@ -14,38 +14,38 @@ export class RegistroComponent {
 
   registroClienteDTO: RegistroClienteDTO;
   constructor() {
-  this.registroClienteDTO = new RegistroClienteDTO();
-  this.ciudades = [];
-  this.cargarCiudades(); 
-  
+    this.registroClienteDTO = new RegistroClienteDTO();
+    this.ciudades = [];
+    this.cargarCiudades();
+
   }
 
   public registrar() {
     if (this.registroClienteDTO.fotoPerfil != "") {
-    console.log(this.registroClienteDTO);
+      console.log(this.registroClienteDTO);
     } else {
-    console.log("Debe cargar una foto");
+      console.log("Debe cargar una foto");
     }
-    }
+  }
 
   public sonIguales(): boolean {
-      return this.registroClienteDTO.password == this.registroClienteDTO.confirmaPassword;
-   }
+    return this.registroClienteDTO.password == this.registroClienteDTO.confirmaPassword;
+  }
 
-   ciudades: string[];
+  ciudades: string[];
 
-   private cargarCiudades() {
+  private cargarCiudades() {
     this.ciudades = ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"];
-    }
+  }
 
   public onFileChange(event: any) {
-      if (event.target.files.length > 0) {
-        this.archivos = event.target.files;
-        this.registroClienteDTO.fotoPerfil = this.archivos[0].name;
-      }
-      }
+    if (event.target.files.length > 0) {
+      this.archivos = event.target.files;
+      this.registroClienteDTO.fotoPerfil = this.archivos[0].name;
+    }
+  }
 
-      archivos!:FileList;
+  archivos!: FileList;
 
 }
 

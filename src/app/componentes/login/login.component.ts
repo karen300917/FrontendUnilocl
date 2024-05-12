@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginDTO } from '../../dto/login-dto';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,20 @@ export class LoginComponent {
 
   loginDTO:LoginDTO;
 
-  constructor() {
+  constructor(private router:Router) {
     this.loginDTO = new LoginDTO();
     }
-  public Login() {
+
+  public login() {
+
+    const rol = "CLIENTE";
     console.log(this.loginDTO);
+
+    if( rol == "CLIENTE" ){
+      this.router.navigate(["/inicio-cliente"]);
+    }else{
+      this.router.navigate(["/inicio-moderador"]);
     }
+  }
 
 }

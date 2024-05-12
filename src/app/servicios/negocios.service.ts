@@ -34,4 +34,10 @@ export class NegociosService {
   public eliminar(codigo: string) {
     this.negocios = this.negocios.filter(n => n.codigoNegocio !== codigo);
   }
+
+  public buscar(codigo: string): ItemNegocioDTO[]{
+    return this.negocios 
+
+  }
+
 }

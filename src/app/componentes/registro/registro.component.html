@@ -76,29 +76,37 @@
         <form #f="ngForm" (ngSubmit)="registrar()">
             <div class="mb-3">
                 <label>Nombre:</label>
-                <input #nombre="ngModel" class="form-control" [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre" [(ngModel)]="registroClienteDTO.nombre" required/>
+                <input #nombre="ngModel" class="form-control"
+                    [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre"
+                    [(ngModel)]="registroClienteDTO.nombre" required />
             </div>
-            
+
             <div class="mb-3">
                 <label>Foto:</label>
                 <input class="form-control" type="file" name="fotoPerfil" (change)="onFileChange($event)" required />
             </div>
-            
+
             <div class="mb-3">
                 <label>Username:</label>
-                <input #nickname="ngModel" class="form-control" [ngClass]="nickname.invalid && nickname.dirty ? 'is-invalid' : ''" type="text" name="nickname" [(ngModel)]="registroClienteDTO.nickname" required/>
+                <input #nickname="ngModel" class="form-control"
+                    [ngClass]="nickname.invalid && nickname.dirty ? 'is-invalid' : ''" type="text" name="nickname"
+                    [(ngModel)]="registroClienteDTO.nickname" required />
             </div>
-            
+
             <div class="mb-3">
                 <label>Correo electrónico:</label>
-                <input #email="ngModel" class="form-control" [ngClass]="email.invalid && email.dirty ? 'is-invalid' : ''" type="email" name="email" [(ngModel)]="registroClienteDTO.email" required/>
+                <input #email="ngModel" class="form-control"
+                    [ngClass]="email.invalid && email.dirty ? 'is-invalid' : ''" type="email" name="email"
+                    [(ngModel)]="registroClienteDTO.email" required />
             </div>
-            
+
             <div class="mb-3">
                 <label>Contraseña:</label>
-                <input #password="ngModel" class="form-control" [ngClass]="password.invalid && password.dirty ? 'is-invalid' : ''" type="password" name="password" [(ngModel)]="registroClienteDTO.password" required/>
+                <input #password="ngModel" class="form-control"
+                    [ngClass]="password.invalid && password.dirty ? 'is-invalid' : ''" type="password" name="password"
+                    [(ngModel)]="registroClienteDTO.password" required />
             </div>
-            
+
             <div class="mb-3">
                 <label>Ciudad:</label>
                 <select class="form-select" name="ciudad" required [(ngModel)]="registroClienteDTO.ciudadResidencia">
@@ -106,22 +114,19 @@
                     @for (item of ciudades; track $index) { <option [value]="item">{{item}}</option> }
                 </select>
             </div>
-            
+
             <div class="mb-3">
                 <label>Repetir contraseña:</label>
-                <input #confirmaPassword="ngModel" class="form-control" [ngClass]="confirmaPassword.invalid && confirmaPassword.dirty ? 'is-invalid' : ''" type="password" name="confirmaPassword" [(ngModel)]="registroClienteDTO.confirmaPassword" required/>
+                <input #confirmaPassword="ngModel" class="form-control"
+                    [ngClass]="confirmaPassword.invalid && confirmaPassword.dirty ? 'is-invalid' : ''" type="password"
+                    name="confirmaPassword" [(ngModel)]="registroClienteDTO.confirmaPassword" required />
             </div>
-            
-            @if (!sonIguales()) { <div class="alert alert-danger" role="alert" >Las contraseñas no coinciden</div> }
-            
+
+            @if (!sonIguales()) { <div class="alert alert-danger" role="alert">Las contraseñas no coinciden</div> }
+
             <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()">
                 <i class="fa-solid fa-circle-plus me-1"></i>Registrarse
-            </button>   
+            </button>
         </form>
     </div>
 </div>
-
-
-
-
-  
