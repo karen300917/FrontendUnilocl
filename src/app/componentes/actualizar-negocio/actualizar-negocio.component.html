@@ -1,7 +1,6 @@
 <div class="card">
     <div class="card-header ps-5 pt-4 pb-4">
-        <h5 class="mb-0"><i class="fa-solid fa-location-dot me-2"></i>Crear un nuevo
-            negocio</h5>
+        <h5 class="mb-0"><i class="fa-solid fa-location-dot me-2"></i>Actualizar negocio</h5>
     </div>
     <div class="card-body p-5">
         <form #f="ngForm">
@@ -10,7 +9,7 @@
                 <div class="col-sm-10">
                     <input #nombre="ngModel" class="form-control"
                         [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre"
-                        [(ngModel)]="registroNegocioDTO.nombre" required />
+                        [(ngModel)]="actualizarNegocioDTO.nombre" required />
                 </div>
             </div>
             <div class="mb-3 row">
@@ -18,7 +17,7 @@
                 <div class="col-sm-10">
                     <textarea #descripcion="ngModel"
                         [ngClass]="descripcion.invalid && descripcion.dirty ? 'is-invalid' : ''" type="text"
-                        [(ngModel)]="registroNegocioDTO.descripcion" name="descripcion" required
+                        [(ngModel)]="actualizarNegocioDTO.descripcion" name="descripcion" required
                         class="form-control"></textarea>
                 </div>
             </div>
@@ -41,20 +40,7 @@
                             required />
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label">Tipo: </label>
-                    <div class="col-sm-10">
-
-
-                        <select name="tipo" required class="form-select" required
-                            [(ngModel)]="registroNegocioDTO.tipoNegocio">
-                            <option value="" selected>Seleccione un tipo para el negocio</option>
-                            @for (item of negocios; track $index) { <option [value]="item">{{item}}</option> }
-                        </select>
-
-
-                    </div>
-                </div>
+            
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Horarios: </label>
                     <div class="col-sm-8">
@@ -107,12 +93,10 @@
 
                     </div>
                 </div>
-                <button class="btn btn-primary" (click)="crearNegocio()" [disabled]="f.invalid">
+                <button class="btn btn-primary" (click)="actualizarNegocio()" [disabled]="f.invalid">
                     <i class="fa-solid fa-circle-plus me-1"></i>Crear negocio
                 </button>
-                </div>
-
-                <app-alerta [alerta] = "alerta"></app-alerta>
+                </div>di
         </form>
     </div>
 </div>

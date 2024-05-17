@@ -7,11 +7,11 @@ import { Alerta } from '../../dto/alerta';
   imports: [],
   templateUrl: './alerta.component.html',
   styleUrl: './alerta.component.css'
-  })
-  export class AlertaComponent {
+})
+export class AlertaComponent {
   @Input() alerta!: Alerta | null;
   public ocultar() {
-  this.alerta = null;
+    this.alerta = null;
   }
-  }
+}
 

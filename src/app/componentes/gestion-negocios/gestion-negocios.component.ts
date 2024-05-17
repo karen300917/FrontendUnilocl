@@ -3,6 +3,8 @@ import { ItemNegocioDTO } from '../../dto/item-negocio-dto';
 import { NegociosService } from '../../servicios/negocios.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { TokenService } from '../../servicios/token.service';
+import { NegocioGetDTO } from '../../dto/NegocioGetDTO';
 @Component({
     selector: 'app-gestion-negocios',
     standalone: true,
@@ -11,30 +13,42 @@ import { Router, RouterModule } from '@angular/router';
     styleUrl: './gestion-negocios.component.css'
 })
 export class GestionNegociosComponent {
-    
 
-    negocios: ItemNegocioDTO[];
-    seleccionados: ItemNegocioDTO[];
+
+    negocios: NegocioGetDTO[];
+    seleccionados: NegocioGetDTO[];
     textoBtnEliminar: string | undefined;
+    textoBtnActualizar: string | undefined;
 
-    constructor(private negocioService: NegociosService, private router: Router) {
+
+    constructor(private negocioService: NegociosService, private router: Router, private tokenService: TokenService) {
         this.negocios = [];
         this.seleccionados = [];
         this.listarNegocios();
+
     }
 
     public listarNegocios() {
-        this.negocios = this.negocioService.listar();
-        console.log(this.negocios);
+        const codigoCliente = this.tokenService.getCodigo();
+        this.negocioService.listarNegociosPropietario(codigoCliente).subscribe({
+            next: (data) => {
+                console.log(data.respuesta)
+                this.negocios = data.respuesta;
+            },
+            error: (error) => {
+                console.error(error);
+            }
+        });
     }
 
-    public seleccionar(producto: ItemNegocioDTO, estado: boolean) {
+    public seleccionar(producto: NegocioGetDTO, estado: boolean) {
         if (estado) {
             this.seleccionados.push(producto);
         } else {
             this.seleccionados.splice(this.seleccionados.indexOf(producto), 1);
         }
         this.actualizarMensaje();
+        this.actualizarMensaje1();
     }
     private actualizarMensaje() {
         const tam = this.seleccionados.length;
@@ -57,8 +71,23 @@ export class GestionNegociosComponent {
         this.actualizarMensaje();
     }
 
-    // navegarLogin() {
-    //     this.router.navigate(["/login"]);
-    // }
+    private actualizarMensaje1() {
+        const tam = this.seleccionados.length;
+        if (tam != 0) {
+            if (tam == 1) {
+                this.textoBtnActualizar = "1 elemento";
+            } else {
+                this.textoBtnActualizar = "";
+            }
+        }
+
+    }
+
+
 
 }
+
+// navegarLogin() {
+//     this.router.navigate(["/login"]);
+// }
+

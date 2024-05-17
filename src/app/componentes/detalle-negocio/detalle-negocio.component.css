@@ -1,0 +1,29 @@
+#formContent {
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    min-height: 90%;
+    padding: 20px 60px 10px 100px;
+    text-align: center;
+   
+  }
+  .form-control{
+    width: 250px;
+    background-color: rgb(248, 240, 240);
+  }
+  input{
+  border: 0;
+  text-align: center;
+  
+  }
+  h2 {
+  color: #ffc000;
+  font-size: 26px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  }
+  .ico{
+  font-size: xx-large;
+  }

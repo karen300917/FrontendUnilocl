@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { LoginDTO } from '../../dto/login-dto';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Alerta } from '../../dto/alerta';
+import { AuthService } from '../../servicios/auth.service';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-login',
@@ -11,23 +14,21 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  alerta!:Alerta;
   loginDTO:LoginDTO;
-
-  constructor(private router:Router) {
+ 
+  constructor(private router:Router, private authService: AuthService, private tokenService:TokenService) {
     this.loginDTO = new LoginDTO();
     }
 
-  public login() {
-
-    const rol = "CLIENTE";
-    console.log(this.loginDTO);
-
-    if( rol == "CLIENTE" ){
-      this.router.navigate(["/inicio-cliente"]);
-    }else{
-      this.router.navigate(["/inicio-moderador"]);
-    }
-  }
-
-}
+    public login() {
+      this.authService.loginCliente(this.loginDTO).subscribe({
+      next: data => {
+        this.tokenService.login(data.respuesta.token);
+      },
+      error: error => {
+      this.alerta = new Alerta(error.error.respuesta, "danger" );
+      }
+      });
+      }
+    }   

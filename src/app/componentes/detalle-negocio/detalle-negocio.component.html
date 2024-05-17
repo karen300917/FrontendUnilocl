@@ -1,1 +1,80 @@
-<p>{{negocio | json}}</p>
+<div id="formContent">
+    <div class="card p-5">
+        <form #f="ngForm">
+            <h2>Detalles</h2>
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <app-alerta [alerta]="alerta"></app-alerta>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <br>
+                        <td>
+
+                            <span class="ico" type="button"><i class="bi bi-chevron-compact-left "></i></span>
+
+                            <img src="{{negocio.imagen[0]}}" width="350px">
+
+                            <span class="ico" type="button"><i class="bi bi-chevron-compact-right"></i></span>
+
+                        </td>
+                        <td>
+                            <div class="contenedor">
+                                <input #nombre="ngModel" class="form-control" [ngClass]="
+                nombre.invalid && (nombre.dirty || nombre.touched)
+                  ? 'is-invalid' : ''
+              " type="text" name="nombre" [(ngModel)]="negocio.nombre" required maxlength="50" disabled="" />
+
+              @for (item of negocio.horario; track $index){
+                                <div class="row mb-2 ">
+                                    <div class="col">
+                                        <input class="form-control" placeholder="Día" type="text" name="dia-{{$index}}"
+                                            [(ngModel)]="item.dia" required />
+
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" placeholder="Hora Inicio" type="time"
+                                            name="horaInicio-{{$index}}" [(ngModel)]="item.horaInicio" required />
+
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-control" placeholder="Hora Fin" type="time"
+                                            name="horaFin-{{$index}}" [(ngModel)]="item.horaFin" required />
+
+                                    </div>
+                                </div>
+                            }
+
+
+                                <input #descripcion="ngModel" class="form-control" [ngClass]="
+              descripcion.invalid && (descripcion.dirty || descripcion.touched)? 'is-invalid': '' " type="text"
+                                    name="descripcion" [(ngModel)]="negocio.descripcion" required disabled="" />
+
+                                <input #categorias="ngModel" class="form-control" [ngClass]="
+              categorias.invalid && (categorias.dirty || categorias.touched)
+                ? 'is-invalid'
+                : ''
+            " type="text" name="tipoNegocio" [(ngModel)]="negocio.tipoNegocio" required maxlength="50" disabled="" />
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <button (click)="ponerFavorito(negocio.codigoNegocio)" class="btn btn-outline-primary me-2">
+                Poner favorito <i class="bi bi-heart-fill"></i>
+            </button>
+
+            <button type="submit" class="btn btn-sm1 btn-outline-primary" routerLink="/gestion-negocios">
+                Volver <i class="bi bi-arrow-bar-left"></i>
+            </button>
+
+        </form>
+    </div>
+
+</div>
+<!-- <app-comentarios [codigoProducto]="producto.codigo"></app-comentarios> -->

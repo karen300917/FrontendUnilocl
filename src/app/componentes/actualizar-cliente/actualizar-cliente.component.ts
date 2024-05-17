@@ -1,34 +1,35 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RegistroClienteDTO } from '../../dto/registro-cliente-dto';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../servicios/auth.service';
 import { AlertaComponent } from '../alerta/alerta.component';
 import { Alerta } from '../../dto/alerta';
 import { ImagenService } from '../../servicios/imagen.service';
+import { ActualizarClienteDTO } from '../../dto/actualizar-cliente-dto';
+import { ClienteService } from '../../servicios/cliente.service';
 
 @Component({
   selector: 'app-registro',
   standalone: true,
   imports: [FormsModule, CommonModule, AlertaComponent],
-  templateUrl: './registro.component.html',
-  styleUrl: './registro.component.css'
+  templateUrl: './actualizar-cliente.component.html',
+  styleUrl: './actualizar-cliente.component.css'
 })
-export class RegistroComponent {
+export class ActualizarClienteComponent {
 
   alerta!:Alerta;
-
-  registroClienteDTO: RegistroClienteDTO;
-  constructor( private authService: AuthService, private imagenService: ImagenService) {
-    this.registroClienteDTO = new RegistroClienteDTO();
+  
+  actualizarClienteDTO: ActualizarClienteDTO;
+  constructor( private clienteService: ClienteService, private imagenService: ImagenService, private authService: AuthService) {
+    this.actualizarClienteDTO = new ActualizarClienteDTO();
     this.ciudades = [];
     this.cargarCiudades();
 
   }
 
-  public registrar() {
-    if (this.registroClienteDTO.fotoPerfil != "") {
-    this.authService.registrarCliente(this.registroClienteDTO).subscribe({
+  public actualizar() {
+    if (this.actualizarClienteDTO.fotoPerfil != "") {
+    this.clienteService.actualizarCliente(this.actualizarClienteDTO).subscribe({
     next: (data) => {
     this.alerta = new Alerta(data.respuesta, "success");
     },
@@ -41,9 +42,7 @@ export class RegistroComponent {
     }
     }
 
-  public sonIguales(): boolean {
-    return this.registroClienteDTO.password == this.registroClienteDTO.confirmaPassword;
-  }
+  
 
   ciudades: string[];
 
@@ -61,7 +60,7 @@ export class RegistroComponent {
   public onFileChange(event: any) {
     if (event.target.files.length > 0) {
       this.archivos = event.target.files;
-      this.registroClienteDTO.fotoPerfil = this.archivos[0].name;
+      this.actualizarClienteDTO.fotoPerfil = this.archivos[0].name;
     }
   }
 
@@ -74,7 +73,7 @@ export class RegistroComponent {
     formData.append('file', this.archivos[0]);
     this.imagenService.subir(formData).subscribe({
     next: data => {
-    this.registroClienteDTO.fotoPerfil = data.respuesta.url;
+    this.actualizarClienteDTO.fotoPerfil = data.respuesta.url;
     this.alerta = new Alerta("Se ha subido la foto", "success");
     },
     error: error => {
@@ -87,5 +86,4 @@ export class RegistroComponent {
     }
 
 }
-
 
