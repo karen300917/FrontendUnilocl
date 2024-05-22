@@ -4,8 +4,9 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { usuarioInterceptor } from './interceptor/usuario.interceptor';
 export const appConfig: ApplicationConfig = {
-providers: [
-provideRouter(routes),
-provideHttpClient(withInterceptors([usuarioInterceptor]))
-]
+    
+    providers: [
+        provideRouter(routes),
+        provideHttpClient(withInterceptors([usuarioInterceptor]))
+    ]
 };

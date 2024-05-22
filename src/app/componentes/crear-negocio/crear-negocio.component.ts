@@ -7,6 +7,8 @@ import { Horario } from '../../dto/horario';
 import { MapaService } from '../../servicios/mapa.service';
 import { Alerta } from '../../dto/alerta';
 import { AlertaComponent } from '../alerta/alerta.component';
+import { ImagenService } from '../../servicios/imagen.service';
+import { TokenService } from '../../servicios/token.service';
 
 @Component({
   selector: 'app-crear-negocio',
@@ -25,11 +27,11 @@ export class CrearNegocioComponent implements OnInit {
 
   alerta!: Alerta;
 
-  constructor(private negociosService: NegociosService, private mapaService: MapaService) {
+  constructor(private negociosService: NegociosService, private imagenService: ImagenService,private tokenService: TokenService, private mapaService: MapaService) {
 
     this.registroNegocioDTO = new RegistroNegocioDTO();
     this.negocios = [];
-    this.cargarNegocios();
+    this.cargarTiposNegocios();
 
 
     this.registroNegocioDTO = new RegistroNegocioDTO();
@@ -39,13 +41,17 @@ export class CrearNegocioComponent implements OnInit {
 
   }
   public crearNegocio() {
-    this.registroNegocioDTO.horarios = this.horarios;
+    const codigoCliente = this.tokenService.getCodigo();
+    this.registroNegocioDTO.horario = this.horarios;
+    this.registroNegocioDTO.codigoPropietario = codigoCliente;
+
+    console.log("Esto es codigo cliente: " + codigoCliente);
     this.negociosService.crear(this.registroNegocioDTO).subscribe({
       next :data => {
-        this.alerta = new Alerta(data.respuesta, "succes")
+        this.alerta = new Alerta("Negocio creado con exito", "succes");
       },
       error: error => {
-        this.alerta = new Alerta(error.respuesta, "danger")
+        this.alerta = new Alerta(error.error.respuesta, "danger");
       }
     });
     console.log(this.registroNegocioDTO);
@@ -60,9 +66,17 @@ export class CrearNegocioComponent implements OnInit {
 
   negocios: string[];
 
-  private cargarNegocios() {
-    this.negocios = ["Hotel", "Cageteria", "Restaurante ", "Museo", "Cartagena"];
-    console.log(this.negocios)
+  private cargarTiposNegocios() {
+    
+    this.negociosService.listarCategorias().subscribe({
+      next: (data) => {
+        this.negocios = data.respuesta;
+      },
+      error: (error) => {
+        console.log("Error al cargar las categorias");
+      }
+    });
+
   }
 
   public onFileChange(event: any) {
@@ -73,12 +87,34 @@ export class CrearNegocioComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    
     this.mapaService.crearMapa();
     this.mapaService.agregarMarcador().subscribe((marcador) => {
       this.registroNegocioDTO.ubicacion.latitud = marcador.lat;
       this.registroNegocioDTO.ubicacion.longitud = marcador.lng;
     });
   }
+
+
+  public subirImagenes() {
+    if (this.archivos != null && this.archivos.length > 0) {
+      const formData = new FormData();
+      formData.append('file', this.archivos[0]);
+      this.imagenService.subir(formData).subscribe({
+        next: data => {
+          this.registroNegocioDTO.imagen.push(data.respuesta.url);
+          this.alerta = new Alerta("Se ha subido la foto", "success");
+        },
+        error: error => {
+          this.alerta = new Alerta(error.error, "danger");
+        }
+      });
+    } else {
+      this.alerta = new Alerta("Debe seleccionar una imagen y subirla", "danger");
+    }
+  }
+
+
   archivos!: FileList;
 
 }

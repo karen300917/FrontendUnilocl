@@ -30,5 +30,9 @@ export class NegociosService {
     return this.http.get<MensajeDTO>(`${this.negociosURL}/listarNegociosPorCliente/${codigoCliente}`);
   }
 
+  public listarCategorias(): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.negociosURL}/listar-categorias`);
+  }
+
   
 }

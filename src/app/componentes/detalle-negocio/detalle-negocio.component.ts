@@ -44,7 +44,7 @@ export class DetalleNegocioComponent {
             this.obtenerProducto(this.codigoNegocio).then(result => {
               this.negocio = result;
 
-              console.log(this.negocio);
+              
           });
     
           

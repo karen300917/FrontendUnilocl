@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-location-dot me-2"></i>Crear revicion</h5>
+    </div>
+    <div class="card-body p-5">
+        <form #f="ngForm">
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Fecha: </label>
+                <div class="col-sm-10">
+                    <input #nombre="ngModel" class="form-control"
+                        [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre"
+                        [(ngModel)]="historialRevicionDTO.fecha" required />
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Descripción: </label>
+                <div class="col-sm-10">
+                    <textarea #descripcion="ngModel"
+                        [ngClass]="descripcion.invalid && descripcion.dirty ? 'is-invalid' : ''" type="text"
+                        [(ngModel)]="historialRevicionDTO.descripcion" name="descripcion" required
+                        class="form-control"></textarea>
+                </div>
+           
+                
+        
+               
+                <button class="btn btn-primary" (click)="crearHistorial()" [disabled]="f.invalid">
+                    <i class="fa-solid fa-circle-plus me-1"></i>Crear revicion
+                </button>
+                </div>
+
+                <app-alerta [alerta] = "alerta"></app-alerta>
+        </form>
+    </div>
+</div>

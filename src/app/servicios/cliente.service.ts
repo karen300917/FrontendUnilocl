@@ -14,11 +14,22 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   public actualizarCliente(actualizarCliente: ActualizarClienteDTO): Observable<MensajeDTO> {
-    return this.http.put<MensajeDTO>(`${this.clienteURL}/actualizarNegocio`, actualizarCliente);
+    return this.http.put<MensajeDTO>(`${this.clienteURL}/actualizar-cliente`, actualizarCliente);
   }
 
-  public ponerFavorito(favorito: favoritoDTO): Observable<MensajeDTO>{
-    return this.http.post<MensajeDTO>(`${this.clienteURL}/agregarFavoritos`, favorito );
+  public ponerFavorito(favorito: favoritoDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.clienteURL}/agregarFavoritos`, favorito);
   }
 
+  public listarfavoritos(codigoCliente: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clienteURL}/listarFavoritos/${codigoCliente}`);
+  }
+
+  public listarRecomendaciones(codigoCliente: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clienteURL}/listarRecomendaciones/${codigoCliente}`);
+
+  }
+  public obtener(codigoCliente: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clienteURL}/obtener/${codigoCliente}`);
+  }
 }

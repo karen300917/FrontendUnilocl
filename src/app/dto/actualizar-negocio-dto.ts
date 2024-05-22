@@ -5,12 +5,12 @@ export class ActualizarNegocioDTO {
     
 
     constructor(
+        public id: string = '',
         public nombre: string = '',
         public descripcion: string = '',
-        public codigoCliente: string = '',
         public ubicacion: Ubicacion = new Ubicacion(),
-        public imagenes: string[] = [],
-        public horarios: Horario[] = [],
-        public telefonos: string[] = []
+        public imagen: string[] = [],
+        public horario: Horario[] = [],
+        public telefono: string[] = []
         ) { }
 }

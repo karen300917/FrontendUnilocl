@@ -39,12 +39,19 @@
                         <input class="form-control" type="file" name="imagenes" (change)="onFileChange($event)" multiple
                             required />
                     </div>
+                    <div class="col-sm-3">
+                        <button type="submit" [disabled]="archivos == null" class="btn btn-primary"
+                            (click)="subirImagenes()">
+    
+                            <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir imágenes
+                        </button>
+                    </div>
                 </div>
             
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Horarios: </label>
                     <div class="col-sm-8">
-                        @for (item of horarios; track $index) {
+                        @for (item of actualizarNegocioDTO.horario; track $index) {
                         <div class="row mb-2 ">
                             <div class="col">
                                 <input class="form-control" placeholder="Día" type="text" name="dia-{{$index}}"

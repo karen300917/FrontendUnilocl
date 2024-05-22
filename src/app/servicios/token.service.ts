@@ -19,6 +19,7 @@ export class TokenService {
   }
 
   public isLogged(): boolean {
+    console.log(this.getToken());
     if (this.getToken()) {
       return true;
     }
@@ -28,14 +29,15 @@ export class TokenService {
     this.setToken(token);
     this.router.navigate(["/"]).then(() => {
       window.location.reload();
-      });
+      
+    });
   }
 
   public logout() {
     window.sessionStorage.clear();
     this.router.navigate(["/login"]).then(() => {
       window.location.reload();
-      });
+    });
   }
 
   private decodePayload(token: string): any {
@@ -65,9 +67,9 @@ export class TokenService {
   public getRole(): string {
     const token = this.getToken();
     if (token) {
-    const values = this.decodePayload(token);
-    return values.rol;
+      const values = this.decodePayload(token);
+      return values.rol;
     }
     return "";
-    }
+  }
 }

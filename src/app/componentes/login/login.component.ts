@@ -14,21 +14,26 @@ import { TokenService } from '../../servicios/token.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  alerta!:Alerta;
-  loginDTO:LoginDTO;
- 
-  constructor(private router:Router, private authService: AuthService, private tokenService:TokenService) {
-    this.loginDTO = new LoginDTO();
-    }
+  alerta!: Alerta;
+  loginDTO: LoginDTO;
+  logModerador: boolean;
 
-    public login() {
-      this.authService.loginCliente(this.loginDTO).subscribe({
+  constructor(private router: Router, private authService: AuthService, private tokenService: TokenService) {
+    this.loginDTO = new LoginDTO();
+    this.logModerador = true;
+  }
+
+  public async login() {
+    
+   this.authService.loginCliente(this.loginDTO).subscribe({
       next: data => {
         this.tokenService.login(data.respuesta.token);
       },
       error: error => {
-      this.alerta = new Alerta(error.error.respuesta, "danger" );
+
+        this.alerta = new Alerta(error.error.respuesta, "danger");
       }
-      });
-      }
-    }   
+    });
+
+  }
+}   

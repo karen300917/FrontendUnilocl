@@ -14,7 +14,11 @@
         <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
         <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
         <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-        <li><a href="#" class="nav-link px-2 link-body-emphasis">Products</a></li>
+        <li><a routerLink="/favoritos" class="nav-link px-2">Favoritos</a></li>
+        <li><a routerLink="/recomendados" class="nav-link px-2">Recomendados</a></li>
+        @if (rol == 'MODERADOR') {
+        <li><a routerLink="/historial-de-revicion" class="nav-link px-2">Historial de Revicion</a></li>
+        }
         <li><a routerLink="/gestion-negocios" class="nav-link px-2">Gestión negocios</a></li>
       </ul>
 
@@ -38,9 +42,9 @@
 
             <li><a class="dropdown-item" routerLink="/actualizar-cliente">Actualizar</a></li>
             <li><a class="dropdown-item" (click)="logout()">salir</a></li>
-           
+
             }
-            
+
           </div>
 
 

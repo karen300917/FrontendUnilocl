@@ -12,11 +12,23 @@ import { LoginGuard } from './guards/permiso.service';
 import { ActualizarNegocioComponent } from './componentes/actualizar-negocio/actualizar-negocio.component';
 import { ActualizarClienteComponent } from './componentes/actualizar-cliente/actualizar-cliente.component';
 import { RolesGuard } from './servicios/roles.service';
+import { HistorialDeRevicionComponent } from './componentes/historial-de-revicion/historial-de-revicion.component';
+import { RevicionComponent } from './componentes/revicion/revicion.component';
+import { FavoritosComponent } from './componentes/favoritos/favoritos.component';
+import { RecomendadosComponent } from './componentes/recomendados/recomendados.component';
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
     { path: 'login', component: LoginComponent },
     { path: 'registro', component: RegistroComponent },
+    { path: 'historial-de-revicion', component: HistorialDeRevicionComponent},
+    { path: 'revicion', component:RevicionComponent},
+    { path: 'favoritos', component:FavoritosComponent},
+    { path: 'recomendados', component:RecomendadosComponent, canActivate: [RolesGuard],data: {
+            expectedRole: ["CLIENTE"]
+        }
+    },
+
     {
         path: "gestion-negocios", component: GestionNegociosComponent, canActivate: [RolesGuard],
         data: { expectedRole: ["CLIENTE"] }
@@ -41,7 +53,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'registro', component: RegistroComponent, canActivate: [LoginGuard] },
     {
-        path: "actualizar-negocio", component: ActualizarNegocioComponent, canActivate: [RolesGuard],
+        path: "actualizar-negocio/:codigo", component: ActualizarNegocioComponent, canActivate: [RolesGuard],
         data: { expectedRole: ["CLIENTE"] }
     },
     {

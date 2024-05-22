@@ -1,4 +1,4 @@
-<div id="formContent">
+  <!-- <div id="formContent">
     <div class="card p-5">
         <form #f="ngForm">
             <h2>Detalles</h2>
@@ -76,5 +76,72 @@
         </form>
     </div>
 
-</div>
+</div>   -->
 <!-- <app-comentarios [codigoProducto]="producto.codigo"></app-comentarios> -->
+
+<div id="formContent">
+    <div class="card p-5">
+        <form #f="ngForm">
+            <h2>Detalles</h2>
+            <div class="container">
+                <div class="container-img mb-3">
+                    <span class="ico" type="button"><i class="bi bi-chevron-compact-left"></i></span>
+                    <img src="{{negocio.imagen[0]}}" width="350px">
+                    <span class="ico" type="button"><i class="bi bi-chevron-compact-right"></i></span>
+                </div>
+                
+                <div class="container-info-product">
+                    <div class="form-group mb-3">
+                        <label for="nombre">Nombre del Negocio</label>
+                        <input #nombre="ngModel" class="form-control" 
+                               [ngClass]="nombre.invalid && (nombre.dirty || nombre.touched) ? 'is-invalid' : ''" 
+                               type="text" name="nombre" [(ngModel)]="negocio.nombre" required maxlength="50" disabled />
+                    </div>
+                    
+                    <div *ngFor="let item of negocio.horario; let i = index" class="container-details-product">
+                        <div class="form-group mb-3">
+                            <label for="dia-{{i}}">Día {{i + 1}}</label>
+                            <input class="form-control" placeholder="Día" type="text" name="dia-{{i}}"
+                                   [(ngModel)]="item.dia" required disabled />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="horaInicio-{{i}}">Hora de Inicio</label>
+                            <input class="form-control" placeholder="Hora Inicio" type="time"
+                                   name="horaInicio-{{i}}" [(ngModel)]="item.horaInicio" required />
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="horaFin-{{i}}">Hora de Fin</label>
+                            <input class="form-control" placeholder="Hora Fin" type="time"
+                                   name="horaFin-{{i}}" [(ngModel)]="item.horaFin" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="descripcion">Descripción</label>
+                        <textarea #descripcion="ngModel" class="form-control" 
+                                  [ngClass]="descripcion.invalid && (descripcion.dirty || descripcion.touched) ? 'is-invalid' : ''" 
+                                  name="descripcion" [(ngModel)]="negocio.descripcion" required disabled></textarea>
+                    </div>
+                    
+                    <div class="form-group mb-3">
+                        <label for="tipoNegocio">Tipo de Negocio</label>
+                        <input #categorias="ngModel" class="form-control" 
+                               [ngClass]="categorias.invalid && (categorias.dirty || categorias.touched) ? 'is-invalid' : ''" 
+                               type="text" name="tipoNegocio" [(ngModel)]="negocio.tipoNegocio" required maxlength="50" disabled />
+                    </div>
+                    
+                    <div class="container-buttons mb-3">
+                        <button (click)="ponerFavorito(negocio.codigoNegocio)" class="btn btn-outline-primary me-2">
+                            Poner favorito <i class="bi bi-heart-fill"></i>
+                        </button>
+                        <button type="button" class="btn btn-secondary" routerLink="/gestion-negocios">
+                            Volver <i class="bi bi-arrow-bar-left"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
