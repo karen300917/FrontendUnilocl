@@ -1,0 +1,37 @@
+
+<div class="card">
+    <div class="card-header ps-5 pt-4 pb-4">
+        <h5 class="mb-0"><i class="fa-solid fa-user-plus me-3"></i>Actualizar Moderador</h5>
+    </div>
+    <div class="card-body p-5">
+        <form #f="ngForm" >
+            <div class="mb-3">
+                <label>Nombre:</label>
+                <input #nombre="ngModel" class="form-control"
+                    [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre"
+                    [(ngModel)]="actualizarModeradorDTO.nombre" required />
+            </div>
+
+        >
+
+            <div class="mb-3">
+                <label>Correo electrónico:</label>
+                <input #email="ngModel" class="form-control"
+                    [ngClass]="email.invalid && email.dirty ? 'is-invalid' : ''" type="email" name="email"
+                    [(ngModel)]="actualizarModeradorDTO.email" required />
+            </div>
+
+           
+
+            
+
+           
+
+            <button (click)="actualizar()"
+            class="btn btn-primary" >
+                <i class="fa-solid fa-circle-plus me-1"></i>Actualizar
+            </button>
+            <app-alerta [alerta]="alerta"></app-alerta>
+        </form>
+    </div>
+</div>

@@ -11,15 +11,16 @@
 
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-        <li><a href="#" class="nav-link px-2 link-body-emphasis">Inventory</a></li>
-        <li><a href="#" class="nav-link px-2 link-body-emphasis">Customers</a></li>
-        <li><a routerLink="/favoritos" class="nav-link px-2">Favoritos</a></li>
-        <li><a routerLink="/recomendados" class="nav-link px-2">Recomendados</a></li>
+       
+       
         @if (rol == 'MODERADOR') {
         <li><a routerLink="/historial-de-revicion" class="nav-link px-2">Historial de Revicion</a></li>
         }
+        @if (rol == 'CLIENTE') {
         <li><a routerLink="/gestion-negocios" class="nav-link px-2">Gestión negocios</a></li>
+        <li><a routerLink="/favoritos" class="nav-link px-2">Favoritos</a></li>
+        <li><a routerLink="/recomendados" class="nav-link px-2">Recomendados</a></li>
+      }
       </ul>
 
 
@@ -39,8 +40,16 @@
             <li><a class="dropdown-item" routerLink="/registro">Registrate</a></li>
             <li><a class="dropdown-item" routerLink="/login">Iniciar sesión</a></li>
             }@else {
-
+              @if (rol == 'CLIENTE') {
             <li><a class="dropdown-item" routerLink="/actualizar-cliente">Actualizar</a></li>
+            <li><a class="dropdown-item" (click)="eliminarCuentaCliente()">Eliminar Cuenta</a></li>
+
+              }
+              @if (rol == 'MODERADOR') {
+            <li><a class="dropdown-item" routerLink="/actualizar-moderador">Actualizar</a></li>
+            <li><a class="dropdown-item" (click)="eliminarCuentaModerador()">Eliminar Cuenta</a></li>
+            
+              }
             <li><a class="dropdown-item" (click)="logout()">salir</a></li>
 
             }
@@ -51,17 +60,15 @@
 
         </ul>
       </div>
+      
     </div>
   </div>
 </header>
 <router-outlet></router-outlet>
 <footer>
   <!-- <p>{{footer}}</p> -->
+  
 </footer>
-
-
-
-
 <!-- <header>
   <p>Página inicial de {{title}}</p>
   <ul>

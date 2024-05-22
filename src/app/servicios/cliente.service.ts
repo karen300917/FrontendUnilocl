@@ -32,4 +32,7 @@ export class ClienteService {
   public obtener(codigoCliente: string): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.clienteURL}/obtener/${codigoCliente}`);
   }
+  public eliminarCuentaCliente(codigoCliente: string): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.clienteURL}/eliminar/${codigoCliente}`);
+  }
 }

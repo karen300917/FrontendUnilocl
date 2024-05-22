@@ -16,6 +16,7 @@ import { HistorialDeRevicionComponent } from './componentes/historial-de-revicio
 import { RevicionComponent } from './componentes/revicion/revicion.component';
 import { FavoritosComponent } from './componentes/favoritos/favoritos.component';
 import { RecomendadosComponent } from './componentes/recomendados/recomendados.component';
+import { ActualizarModeraadorComponent } from './componentes/actualizar-moderaador/actualizar-moderaador.component';
 
 export const routes: Routes = [
     { path: '', component: InicioComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     { path: 'historial-de-revicion', component: HistorialDeRevicionComponent},
     { path: 'revicion', component:RevicionComponent},
     { path: 'favoritos', component:FavoritosComponent},
+    
     { path: 'recomendados', component:RecomendadosComponent, canActivate: [RolesGuard],data: {
             expectedRole: ["CLIENTE"]
         }
@@ -59,6 +61,10 @@ export const routes: Routes = [
     {
         path: "actualizar-cliente", component: ActualizarClienteComponent, canActivate: [RolesGuard],
         data: { expectedRole: ["CLIENTE"] }
+    },
+    {
+        path: "actualizar-moderador", component: ActualizarModeraadorComponent, canActivate: [RolesGuard],
+        data: { expectedRole: ["MODERADOR"] }
     },
 
     { path: "**", pathMatch: "full", redirectTo: "" }
