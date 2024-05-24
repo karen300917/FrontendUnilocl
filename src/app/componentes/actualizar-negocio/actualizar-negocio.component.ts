@@ -70,8 +70,12 @@ export class ActualizarNegocioComponent implements OnInit {
   }
 
   public agregarTelefono() {
-    this.telefonos.push();
+    this.actualizarNegocioDTO.telefono.push('');
   }
+
+  eliminarTelefono(index: number) {
+    this.actualizarNegocioDTO.telefono.splice(index, 1);
+}
 
   negocios: string[];
 
