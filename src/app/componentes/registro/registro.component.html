@@ -67,76 +67,91 @@
     </div>
 </div> -->
 
-
-<div class="card">
-    <div class="card-header ps-5 pt-4 pb-4">
+<div class="card shadow-lg mx-auto" style="max-width: 700px;">
+    <div class="card-header bg-dark text-white ps-5 pt-4 pb-4">
         <h5 class="mb-0"><i class="fa-solid fa-user-plus me-3"></i>Registro de un nuevo cliente</h5>
     </div>
     <div class="card-body p-5">
-        <form #f="ngForm" >
+        <form #f="ngForm">
             <div class="mb-3">
-                <label>Nombre:</label>
+                <label class="form-label fw-bold">Nombre:</label>
                 <input #nombre="ngModel" class="form-control"
-                    [ngClass]="nombre.invalid && nombre.dirty ? 'is-invalid' : ''" type="text" name="nombre"
+                    [ngClass]="{'is-invalid': nombre.invalid && nombre.dirty}" type="text" name="nombre"
                     [(ngModel)]="registroClienteDTO.nombre" required />
+                <div *ngIf="nombre.invalid && nombre.dirty" class="invalid-feedback">
+                    El nombre es requerido.
+                </div>
             </div>
 
             <div class="mb-3 row">
-                <label class="col-sm-2 col-form-label">Foto: </label>
-                <div class="col-sm-8">
+                <label class="col-sm-3 col-form-label fw-bold">Foto: </label>
+                <div class="col-sm-6">
                     <input type="file" class="form-control" name="foto" (change)="onFileChange($event)" />
                 </div>
-                <div class="col-sm-2">
-                    <button type="submit" [disabled]="archivos == null" class="btn btn-primary" (click)="subirImagen()">
-                        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir Foto
+                <div class="col-sm-3 d-flex align-items-center">
+                    <button type="button" [disabled]="!archivos" class="btn btn-secondary w-100" (click)="subirImagen()">
+                        <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir
                     </button>
                 </div>
             </div>
 
             <div class="mb-3">
-                <label>Username:</label>
+                <label class="form-label fw-bold">Username:</label>
                 <input #nickname="ngModel" class="form-control"
-                    [ngClass]="nickname.invalid && nickname.dirty ? 'is-invalid' : ''" type="text" name="nickname"
+                    [ngClass]="{'is-invalid': nickname.invalid && nickname.dirty}" type="text" name="nickname"
                     [(ngModel)]="registroClienteDTO.nickname" required />
+                <div *ngIf="nickname.invalid && nickname.dirty" class="invalid-feedback">
+                    El username es requerido.
+                </div>
             </div>
 
             <div class="mb-3">
-                <label>Correo electrónico:</label>
+                <label class="form-label fw-bold">Correo electrónico:</label>
                 <input #email="ngModel" class="form-control"
-                    [ngClass]="email.invalid && email.dirty ? 'is-invalid' : ''" type="email" name="email"
+                    [ngClass]="{'is-invalid': email.invalid && email.dirty}" type="email" name="email"
                     [(ngModel)]="registroClienteDTO.email" required />
+                <div *ngIf="email.invalid && email.dirty" class="invalid-feedback">
+                    El correo electrónico es requerido y debe ser válido.
+                </div>
             </div>
 
             <div class="mb-3">
-                <label>Ciudad:</label>
+                <label class="form-label fw-bold">Ciudad:</label>
                 <select class="form-select" name="ciudad" required [(ngModel)]="registroClienteDTO.ciudadResidencia">
                     <option value="" selected>Seleccione una ciudad</option>
-                    @for (item of ciudades; track $index) { <option [value]="item">{{item}}</option> }
+                    <option *ngFor="let item of ciudades" [value]="item">{{item}}</option>
                 </select>
             </div>
 
             <div class="mb-3">
-                <label>Contraseña:</label>
+                <label class="form-label fw-bold">Contraseña:</label>
                 <input #password="ngModel" class="form-control"
-                    [ngClass]="password.invalid && password.dirty ? 'is-invalid' : ''" type="password" name="password"
+                    [ngClass]="{'is-invalid': password.invalid && password.dirty}" type="password" name="password"
                     [(ngModel)]="registroClienteDTO.password" required />
+                <div *ngIf="password.invalid && password.dirty" class="invalid-feedback">
+                    La contraseña es requerida.
+                </div>
             </div>
-
 
             <div class="mb-3">
-                <label>Repetir contraseña:</label>
+                <label class="form-label fw-bold">Repetir contraseña:</label>
                 <input #confirmaPassword="ngModel" class="form-control"
-                    [ngClass]="confirmaPassword.invalid && confirmaPassword.dirty ? 'is-invalid' : ''" type="password"
+                    [ngClass]="{'is-invalid': confirmaPassword.invalid && confirmaPassword.dirty}" type="password"
                     name="confirmaPassword" [(ngModel)]="registroClienteDTO.confirmaPassword" required />
+                <div *ngIf="confirmaPassword.invalid && confirmaPassword.dirty" class="invalid-feedback">
+                    Debe repetir la contraseña.
+                </div>
             </div>
 
-            @if (!sonIguales()) { <div class="alert alert-danger" role="alert">Las contraseñas no coinciden</div> }
+            <div *ngIf="!sonIguales()" class="alert alert-danger" role="alert">
+                Las contraseñas no coinciden
+            </div>
 
-            <button (click)="registrar()"
-            class="btn btn-primary" type="submit" [disabled]="f.invalid || !sonIguales()">
+            <button (click)="registrar()" class="btn btn-dark w-100" type="submit" [disabled]="f.invalid || !sonIguales()">
                 <i class="fa-solid fa-circle-plus me-1"></i>Registrarse
             </button>
             <app-alerta [alerta]="alerta"></app-alerta>
         </form>
     </div>
 </div>
+

@@ -1,9 +1,48 @@
-<div class="card">
+<!-- <div class="card">
     <div class="card-header ps-5 pt-4 pb-4">
-    <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-location me-2"></i>Resultados de
-    búsqueda para "{{textoBusqueda}}"</h5>
+        <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-location me-2"></i>Resultados de
+            búsqueda para "{{textoBusqueda}}"</h5>
     </div>
-    <div class="card-body p-5">
-    <div id="mapa"></div>
+     @for (item of resultados; track $index) {
+    <td>
+        <p>{{item.nombre}}</p>
+    </td>
+    <td>
+        <p>{{item.tipoNegocio}}</p>
+    </td>
+    <td>
+        <p>{{item.imagenDestacada}}</p>
+    </td>
+    <td>
+        <a routerLink="/detalle-negocio/{{item.codigoNegocio}}"><i
+                class="fa-solid fa-circle-info me-2"></i>Ver detalle</a>
+
+    </td>
+
+    } 
+
     </div>
-    </div>
+    <div id="mapa"></div> -->
+    <div class="card mt-4">
+        <div class="card-header ps-5 pt-4 pb-4">
+            <h5 class="mb-0"><i class="fa-solid fa-magnifying-glass-location me-2"></i>Resultados de búsqueda para "{{ textoBusqueda }}"</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div *ngFor="let item of resultados; let i = index" class="col-md-4 mb-4">
+                    <div class="card h-100">
+                       
+                            <h5 class="card-title">{{ item.nombre }}</h5>
+                            <p class="card-text">Tipo de Negocio: {{ item.tipoNegocio }}</p>
+                            <div class="card-footer text-end">
+                                <a [routerLink]="['/detalle-negocio', item.codigoNegocio]" class="btn btn-primary">
+                                    <i class="fa-solid fa-circle-info me-2"></i>Ver detalle
+                                </a>
+                            </div>
+                        </div>    
+            </div>
+        </div>
+    
+    <div id="mapa" class="mt-4"></div>
+    
+    

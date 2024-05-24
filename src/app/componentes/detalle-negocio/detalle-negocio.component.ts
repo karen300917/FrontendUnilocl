@@ -90,6 +90,7 @@ export class DetalleNegocioComponent {
         
         let codigoUsuario = this.tokenService.getCodigo();
         this.favorito.idCliente = codigoUsuario;
+
         this.favorito.idProducto = codigo;
         this.clienteService.ponerFavorito(this.favorito).subscribe({
           next: data => {

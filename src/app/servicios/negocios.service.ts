@@ -4,10 +4,12 @@ import { MensajeDTO } from '../dto/mensaje-dto';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { ActualizarNegocioDTO } from '../dto/actualizar-negocio-dto';
+import { NegocioGetDTO } from '../dto/NegocioGetDTO';
+import { ItemNegocioDTO } from '../dto/item-negocio-dto';
+import { BusquedaDTO } from '../dto/busqueda';
 @Injectable({
   providedIn: 'root'
 })
-
 export class NegociosService {
   
   private negociosURL = "http://localhost:8080/api/negocio";
@@ -29,10 +31,19 @@ export class NegociosService {
   public listarNegociosPropietario(codigoCliente: string): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.negociosURL}/listarNegociosPorCliente/${codigoCliente}`);
   }
+  public listarTodosNegocios(
+  ): Observable<MensajeDTO> {
+    return this.http.get<MensajeDTO>(`${this.negociosURL}/listarNegocios`);
+  }
+  public buscarNegocios(codigoCliente: string, item:BusquedaDTO): Observable<MensajeDTO> {
+    return this.http.post<MensajeDTO>(`${this.negociosURL}/buscadorNegocios/${codigoCliente}`, item);
+  }
+
 
   public listarCategorias(): Observable<MensajeDTO> {
     return this.http.get<MensajeDTO>(`${this.negociosURL}/listar-categorias`);
   }
+  
 
   
 }

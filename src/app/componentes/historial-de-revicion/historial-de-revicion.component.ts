@@ -4,6 +4,7 @@ import { NegociosService } from '../../servicios/negocios.service';
 import { TokenService } from '../../servicios/token.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NegocioDTO } from '../../dto/negocio-dto';
 
 @Component({
   selector: 'app-historial-de-revicion',
@@ -13,8 +14,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './historial-de-revicion.component.css'
 })
 export class HistorialDeRevicionComponent {
-  negocios: NegocioGetDTO[];
-  seleccionados: NegocioGetDTO[];
+  negocios: NegocioDTO[];
+  seleccionados: NegocioDTO[];
   textoBtnSolicitud: string | undefined;
 
   constructor(private negocioService: NegociosService,private tokenService: TokenService) {
@@ -25,19 +26,19 @@ export class HistorialDeRevicionComponent {
 
 }
 
-  public seleccionar(producto: NegocioGetDTO, estado: boolean) {
+  public seleccionar(producto: NegocioDTO, estado: boolean) {
     if (estado) {
         this.seleccionados.push(producto);
     } else {
         this.seleccionados.splice(this.seleccionados.indexOf(producto), 1);
     }
     this.solicitud();
-    
+    console.log("seleccionados", this.seleccionados)
 
 }
 public listarNegocios() {
-  const codigoModerador = this.tokenService.getCodigo();
-  this.negocioService.listarNegociosPropietario(codigoModerador).subscribe({
+  
+  this.negocioService.listarTodosNegocios().subscribe({
       next: (data) => {
           console.log(data.respuesta)
           this.negocios = data.respuesta;

@@ -51,7 +51,7 @@ export const routes: Routes = [
         path: "detalle-negocio/:codigo", component: DetalleNegocioComponent, canActivate: [RolesGuard],
         data: { expectedRole: ["CLIENTE"] }
     },
-    { path: "busqueda/:texto", component: BusquedaComponent },
+    { path: "busqueda/:texto/:tipo", component: BusquedaComponent },
     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
     { path: 'registro', component: RegistroComponent, canActivate: [LoginGuard] },
     {
