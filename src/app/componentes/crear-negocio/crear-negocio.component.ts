@@ -23,7 +23,7 @@ export class CrearNegocioComponent implements OnInit {
 
   registroNegocioDTO: RegistroNegocioDTO;
   horarios: Horario[];
-  telefonos: string[];
+  telefono: string[];
 
   alerta!: Alerta;
 
@@ -36,7 +36,7 @@ export class CrearNegocioComponent implements OnInit {
 
     this.registroNegocioDTO = new RegistroNegocioDTO();
     this.horarios = [new Horario()];
-    this.telefonos = [];
+    this.telefono = [];
 
 
   }
@@ -59,9 +59,13 @@ export class CrearNegocioComponent implements OnInit {
   public agregarHorario() {
     this.horarios.push(new Horario());
   }
-
+ 
+  eliminarTelefono(index: number) {
+    this.registroNegocioDTO.telefono.splice(index, 1);
+}
   public agregarTelefono() {
-    this.horarios.push();
+    
+    this.registroNegocioDTO.telefono.push('');
   }
 
   negocios: string[];
